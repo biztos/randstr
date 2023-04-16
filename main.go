@@ -41,7 +41,7 @@ func main() {
 
 	lang := opts["--lang"].(string)
 	if lang != "go" && lang != "perl" && lang != "js" {
-		fmt.Fprintf(os.Stderr, "Unsupported langauge %s; use -h for help.\n",
+		fmt.Fprintf(os.Stderr, "Unsupported language %s; use -h for help.\n",
 			lang)
 		os.Exit(2)
 	}
@@ -53,8 +53,11 @@ func main() {
 			set_go_omits(omit)
 		case "perl":
 			set_perl_omits(omit)
+		case "js":
+			set_js_omits(omit)
 		default:
 			panic("unexpected lang: " + lang)
+
 		}
 		if opts["--white"] == false {
 			omit[32] = true // only worried about space for now.
@@ -67,6 +70,8 @@ func main() {
 		set_go_format(pf)
 	case "perl":
 		set_perl_format(pf)
+	case "js":
+		set_js_format(pf)
 	default:
 		panic("unexpected lang: " + lang)
 	}
